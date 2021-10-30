@@ -34,8 +34,12 @@ const main = async () => {
   const octokit = new GitHub(token)
 
   const res = await octokit.pulls.list(query)
-  const pr = res.data.length && res.data.filter(pr =>
-      (!author || pr.user.login === author) && (!title || pr.title.match(new RegExp(title)))
+  const pr =
+    res.data.length &&
+    res.data.filter(
+      pr =>
+        (!author || pr.user.login === author) &&
+        (!title || pr.title.match(new RegExp(title)))
     )[0]
 
   core.debug(`pr: ${JSON.stringify(pr, null, 2)}`)
